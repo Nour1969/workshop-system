@@ -20,6 +20,19 @@ public class WorkshopImpl implements Workshop {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkshopImpl workshop = (WorkshopImpl) o;
+        return id != null && id.equals(workshop.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
     public Integer getId() {
         return id;
     }

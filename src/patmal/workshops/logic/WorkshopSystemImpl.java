@@ -72,23 +72,14 @@ public class WorkshopSystemImpl implements WorkshopSystem {
         Instructor registeredInstructor = requireRegisteredInstructor(instructor);
         Workshop registeredWorkshop = requireRegisteredWorkshop(workshop);
         Instructor currentInstructor = registeredWorkshop.getInstructor();
+
         if (currentInstructor != null && currentInstructor != registeredInstructor) {
             throw new IllegalArgumentException("Workshop " + workshop.getId()
                     + " is already associated with another instructor");
         }
 
         ((WorkshopImpl) registeredWorkshop).setInstructor(registeredInstructor);
-        for (Team team : teams.values()) {
-            if (team.getWorkshop() == registeredWorkshop) {
-                for (Student student : team.getStudents()) {
-                    if (student instanceof StudentImpl) {
-                        ((StudentImpl) student).setInstructor(registeredInstructor);
-                    }
-                }
-            }
-        }
     }
-
     @Override
     public Team createTeam(String name, Workshop workshop, List<String> studentIds) {
         requireText(name, "Team name");

@@ -55,6 +55,19 @@ public class InstructorImpl implements Instructor {
         return Collections.unmodifiableList(workshops);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InstructorImpl that = (InstructorImpl) o;
+        return id != null && id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
     public void setWorkshops(List<Workshop> workshops) {
         List<Workshop> newWorkshops = new ArrayList<>();
         if (workshops != null) {
